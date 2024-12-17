@@ -22,3 +22,8 @@ class Style():
   BLUE = "\033[34m"
   YELLOW = "\033[33m"
   RESET = "\033[0m"
+
+def create_directory(directory_path: Union[str, Path]) -> None:
+    directory_path = Path(directory_path)
+    if not directory_path.exists():
+        directory_path.mkdir(parents=True, exist_ok=True)

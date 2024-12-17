@@ -17,4 +17,4 @@ if __name__ == "__main__":
         for extension, count in ext_counts.items():
             print(f"{extension :<10} {count:>6}")
             total = sum(ext_counts.values())
-        print(f"{Style.YELLOW}{'Total' :<10} {total:>6}{Style.RESET}", end ="\n")
+        print(f"{Style.YELLOW}{'Total' :<10} {total:>6}{Style.RESET}", end ="\n\n")

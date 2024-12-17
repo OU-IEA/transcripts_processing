@@ -20,7 +20,7 @@
 				"ms-python.python",
 				"charliermarsh.ruff",
 				"streetsidesoftware.code-spell-checker",
-				"ms-python.isort"
+				"ms-python.isort",
 			]
 		}
 	},

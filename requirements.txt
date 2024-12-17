@@ -3,3 +3,6 @@ python-dotenv
 aiofiles
 loguru
 tqdm
+pillow
+tesserocr
+opencv-python-headless
