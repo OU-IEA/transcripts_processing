@@ -13,7 +13,7 @@ files = list(image_path.glob('*'))
 os.environ['OMP_THREAD_LIMIT'] = '1'
 
 def main():
-    with concurrent.futures.ProcessPoolExecutor(max_workers=2) as executor:
+    with concurrent.futures.ProcessPoolExecutor(max_workers=12) as executor:
         for i in zip(files,executor.map(ocr,files)):
             print('processed')
  
