@@ -13,7 +13,7 @@ async def create_index(index_path: Path) -> None:
 
     data = np.asarray(content).reshape(-1, 4)
     df = pd.DataFrame(
-        data=data, columns = ["file_handle", "pid", "export_date", "file_path"]
+        data=data, columns=["file_handle", "pid", "export_date", "file_path"]
     )
     df = df.apply(lambda x: x.str.replace("\n", ""))
 
