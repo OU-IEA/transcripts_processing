@@ -1,16 +1,11 @@
-FROM python:3.13.1-slim-bullseye
+FROM python:3.13.1-slim-bullseye as builder
 
 # install basic tools
 RUN apt-get update && apt-get install --no-install-recommends --yes \
     apt-transport-https \
-    asciidoc \
     automake \
-    bash \
     ca-certificates \
-    curl \
-    docbook-xsl \
     g++ \
-    git \
     libleptonica-dev \
     libtool \
     libicu-dev \
@@ -19,7 +14,6 @@ RUN apt-get update && apt-get install --no-install-recommends --yes \
     make \
     pkg-config \
     wget \
-    xsltproc \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /src
