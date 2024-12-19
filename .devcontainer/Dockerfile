@@ -14,7 +14,8 @@ RUN apt-get update && apt-get install --no-install-recommends --yes \
     make \
     pkg-config \
     wget \
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/\* /tmp/\* /var/tmp/* 
 
 WORKDIR /src
 

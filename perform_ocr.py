@@ -1,16 +1,28 @@
+import os
+from pathlib import Path
+import concurrent.futures
 from dotenv import load_dotenv
-import  os
-from src.ocr import OCR
+from src.ocr_multiprocessing import ocr
 from src.helpers import create_directory
-
+import time
 
 load_dotenv()
-image_path = os.environ.get('IMAGE_PATH_TEST')
-csv_path = os.environ.get('FILE_INDEX_PATH')
-ocr_output_path = os.environ.get('FILE_JSON_OUPUT_PATH')
 
+uga_image_path = Path(os.getenv("IMAGE_PATH_UGA"))
+uga_image_output_path = Path(uga_image_path,'json_output')
 
+files = list(uga_image_path.glob('*'))
+
+os.environ['OMP_THREAD_LIMIT'] = '1'
+
+def main():
+    with concurrent.futures.ProcessPoolExecutor(max_workers=12) as executor:
+        for i in zip(files,executor.map(ocr,files)):
+            print('processed')
+ 
 if __name__ == '__main__':
-    create_directory(ocr_output_path)
-    ocr = OCR(image_path, csv_path, ocr_output_path)
-    ocr.run_ocr()
+    create_directory(uga_image_output_path)
+    start = time.time()
+    main()
+    end = time.time()
+    print(end-start)

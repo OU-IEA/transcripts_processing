@@ -26,4 +26,5 @@ class Style():
 def create_directory(directory_path: Union[str, Path]) -> None:
     directory_path = Path(directory_path)
     if not directory_path.exists():
-        directory_path.mkdir(parents=True, exist_ok=True)
+        directory_path.mkdir(parents=True)
+        print(f"Output directory created at {Style.GREEN}{directory_path}{Style.RESET}")
