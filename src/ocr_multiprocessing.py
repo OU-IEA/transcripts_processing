@@ -4,8 +4,11 @@ from PIL import Image
 import os
 from pathlib import Path
 import json
+from loguru import logger
 
+logger.add("issues.log")
 
+@logger.catch
 def ocr(img_path):
     os.environ["OMP_THREAD_LIMIT"] = "1"
     custom_config = {

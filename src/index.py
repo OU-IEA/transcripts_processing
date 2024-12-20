@@ -5,6 +5,7 @@ import numpy as np
 
 from loguru import logger
 
+logger.add("issues.log")
 
 @logger.catch
 async def create_index(index_path: Path) -> None:
