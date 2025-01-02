@@ -116,3 +116,4 @@ __pypackages__/
 # Celery stuff
 celerybeat-schedule
 output.txt
+.Rhistory

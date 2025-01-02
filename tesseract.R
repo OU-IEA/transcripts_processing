@@ -9,8 +9,8 @@ library(fs)
 # set-up ------------------------------------------------------------------
 
 # Let's set up a few things 
-input_dir <- 'transcripts/STUREC_HS/'
-output_dir <- 'transcripts/json_ocr_sturec'
+input_dir <- '../../transcripts/STUREC_HS/'
+output_dir <- '../../transcripts/json_ocr_sturec'
 
 # create output json directory if it doesn't exist;
 # will not overwrite existing directory
