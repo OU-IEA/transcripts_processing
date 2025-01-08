@@ -1,31 +1,20 @@
-import os
-from pathlib import Path
 import concurrent.futures
-from dotenv import load_dotenv
+from src.utils import read_log
 from src.ocr_multiprocessing import ocr
-from src.helpers import create_directory
-import time
 from tqdm import tqdm
+import pickle 
 
 
-load_dotenv()
-
-uga_image_path = Path(os.getenv("IMAGE_PATH_STUREC"))
-uga_image_output_path = Path(uga_image_path,'json_output')
-
-files = list(uga_image_path.glob('*'))
-os.environ['OMP_THREAD_LIMIT'] = '1'
-
-def main():
-    with tqdm(total=len(files)) as progress:
-        with concurrent.futures.ProcessPoolExecutor(max_workers=2) as executor:
-            for i in zip(files,executor.map(ocr,files)):
+def main_ocr(in_files):
+    with tqdm(total=len(in_files)) as progress:
+        with concurrent.futures.ProcessPoolExecutor(max_workers=8) as executor:
+            for i in zip(in_files,executor.map(ocr,in_files)):
                 progress.update()
 
 
 if __name__ == '__main__':
-    create_directory(uga_image_output_path)
-    start = time.time()
-    main()
-    end = time.time()
-    print(end-start)
+    with open('temp/ocr_input_files.pkl','rb') as f:
+        in_files = pickle.load(f)
+    processed = read_log('temp/ocr_processed.log')
+    to_process = in_files - processed
+    main_ocr(to_process)

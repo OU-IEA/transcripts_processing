@@ -15,13 +15,13 @@ def ocr(img_path):
         "tessedit_char_blacklist": "*|{}[]()<>_+=^%$#@!~`?",
     }
     with PyTessBaseAPI(
-        path="/usr/local/share/tessdata",
+        path="C:\\Program Files\\Tesseract-OCR\\tessdata",
         psm=PSM.AUTO,
         oem=OEM.DEFAULT,
         variables=custom_config,
     ) as api:
         outfile = img_path.with_suffix(".json")
-        outfile = Path(outfile.parent, "json_output", outfile.name)
+        outfile = outfile.parent / "json_output" / outfile.name
 
         if not outfile.exists():
             # minor preprocessing and file read
@@ -39,6 +39,8 @@ def ocr(img_path):
                 "transcript": translated_text,
             }
 
-            json_object = json.dumps(transcript, indent=4)
             with open(outfile, "w") as outfile:
-                outfile.write(json_object)
+                with open('temp/ocr_processed.log', 'a') as log:
+                    log.write(f"{img_path}\n")
+                    json.dump(transcript, outfile, indent=4)
+            
