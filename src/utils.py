@@ -45,18 +45,23 @@ def read_log(filename) -> set:
         return set(Path(line.strip()) for line in lines)
 
 
-@logger.catch
-def move_files(source_folder, file_pattern, dest_folder) -> None:
-    source_folder = Path(source_folder)
-    dest_folder = Path(dest_folder)
-    files = list(
+def get_image_files(image_path: Path) -> set:
+    file_patterns = [
+        "*.tif",
+        "*.jpg",
+        "*.png",
+        "*.jpeg",
+        "*.tiff",
+        "*.JPG",
+        "*.JPEG",
+        "*.PNG",
+        "*.TIF",
+        "*.TIFF",
+    ]
+
+    files = set(
         itertools.chain.from_iterable(
-            source_folder.glob(pattern) for pattern in file_pattern
+            image_path.glob(pattern) for pattern in file_patterns
         )
     )
-    for file in files:
-        file.replace(dest_folder / file.name)
-
-    print(
-        f"Files moved from {Style.YELLOW}{source_folder}{Style.RESET} to {Style.GREEN}{dest_folder} {Style.GREEN}"
-    )
+    return files

@@ -117,3 +117,4 @@ __pypackages__/
 celerybeat-schedule
 output.txt
 .Rhistory
+temp/ocr_input_files.pkl

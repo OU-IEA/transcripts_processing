@@ -1,6 +1,6 @@
 from pathlib import Path
 from dotenv import load_dotenv
-from src.utils import create_directory, move_files
+from src.utils import create_directory, get_image_files
 import os
 import pickle
 from loguru import logger
@@ -10,14 +10,9 @@ def main():
     create_directory(image_output_path)
     create_directory("temp")
 
-    # move pdf and db files to skipped_files
-    create_directory(image_path / "skipped_files")
-    move_files(
-        image_path, ["*.pdf", "*.PDF", ".db"], Path(image_path / "skipped_files")
-    )
-
     # save all image files to pickle; they will be loaded in during ocr step
-    in_files = set(image_path.glob("*.*"))
+    in_files = get_image_files(image_path)
+    print(f"Number of files to be processed: {len(in_files)}")
     with open("temp/ocr_input_files.pkl", "wb") as f:
         pickle.dump(in_files, f, protocol=pickle.HIGHEST_PROTOCOL)
 
