@@ -1,7 +1,7 @@
 from pathlib import Path
 from dotenv import load_dotenv
 import os
-from utils import count_files, Style
+from src.utils import count_files, Style
 
 
 load_dotenv()

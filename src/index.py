@@ -7,6 +7,7 @@ from loguru import logger
 
 logger.add("issues.log")
 
+
 @logger.catch
 async def create_index(index_path: Path) -> None:
     async with aiofiles.open(index_path, mode="r") as index:

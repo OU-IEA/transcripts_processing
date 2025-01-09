@@ -8,6 +8,7 @@ from loguru import logger
 
 logger.add("issues.log")
 
+
 @logger.catch
 def ocr(img_path):
     os.environ["OMP_THREAD_LIMIT"] = "1"
@@ -40,7 +41,6 @@ def ocr(img_path):
             }
 
             with open(outfile, "w") as outfile:
-                with open('temp/ocr_processed.log', 'a') as log:
+                with open("temp/ocr_processed.log", "a") as log:
                     log.write(f"{img_path}\n")
                     json.dump(transcript, outfile, indent=4)
-            

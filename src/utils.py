@@ -3,8 +3,10 @@ import collections
 from typing import Union
 from tqdm import tqdm
 from loguru import logger
+import itertools
 
 logger.add("issues.log")
+
 
 @logger.catch
 def count_files(directory_path: Union[str, Path], include_subdirectories=False) -> dict:
@@ -27,6 +29,7 @@ class Style:
     YELLOW = "\033[33m"
     RESET = "\033[0m"
 
+
 @logger.catch
 def create_directory(directory_path: Union[str, Path]) -> None:
     directory_path = Path(directory_path)
@@ -34,8 +37,26 @@ def create_directory(directory_path: Union[str, Path]) -> None:
         directory_path.mkdir(parents=True)
         print(f"Output directory created at {Style.GREEN}{directory_path}{Style.RESET}")
 
+
 @logger.catch
-def read_log(filename):
-    with open(filename, 'r') as file:
+def read_log(filename) -> set:
+    with open(filename, "r") as file:
         lines = file.readlines()
         return set(Path(line.strip()) for line in lines)
+
+
+@logger.catch
+def move_files(source_folder, file_pattern, dest_folder) -> None:
+    source_folder = Path(source_folder)
+    dest_folder = Path(dest_folder)
+    files = list(
+        itertools.chain.from_iterable(
+            source_folder.glob(pattern) for pattern in file_pattern
+        )
+    )
+    for file in files:
+        file.replace(dest_folder / file.name)
+
+    print(
+        f"Files moved from {Style.YELLOW}{source_folder}{Style.RESET} to {Style.GREEN}{dest_folder} {Style.GREEN}"
+    )

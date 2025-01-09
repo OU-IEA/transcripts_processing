@@ -1,0 +1,1 @@
+https://github.com/simonflueckiger/tesserocr-windows_build
