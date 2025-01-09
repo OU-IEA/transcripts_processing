@@ -22,7 +22,7 @@ def ocr(img_path):
         variables=custom_config,
     ) as api:
         outfile = img_path.with_suffix(".json")
-        outfile = outfile.parent / "json_output" / outfile.name
+        outfile = outfile.parent / "json_ocr_output" / outfile.name
 
         if not outfile.exists():
             # minor preprocessing and file read
