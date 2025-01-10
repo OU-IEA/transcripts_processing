@@ -19,4 +19,5 @@ if __name__ == "__main__":
         in_files = pickle.load(f)
     processed = read_log("temp/ocr_processed.log")
     to_process = in_files - processed
+    print(f"Processing: {len(to_process)} files")
     main_ocr(to_process)
