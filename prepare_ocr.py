@@ -19,7 +19,7 @@ def main():
 
 if __name__ == "__main__":
     load_dotenv()
-    image_path = Path(os.getenv("IMAGE_PATH_STUREC"))
+    image_path = Path(os.getenv("IMAGE_PATH_UGA"))
     image_output_path = Path(image_path, "json_ocr_output")
 
     main()
