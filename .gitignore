@@ -118,3 +118,4 @@ celerybeat-schedule
 output.txt
 .Rhistory
 temp/ocr_input_files.pkl
+.vscode/settings.json

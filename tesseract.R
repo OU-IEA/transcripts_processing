@@ -1,7 +1,6 @@
 library(tesseract)
 library(furrr)
 library(yyjsonr)
-library(tictoc)
 library(stringi)
 library(fs)
 
@@ -45,8 +44,6 @@ output_files <- path(output_dir, files_delta,ext='json')
 plan(multisession)
 
 
-tic()
-
 future_pmap(list(input_files, output_files, files_delta),
                    function(x, y, z){
                      temp <- ocr(x)
@@ -55,4 +52,3 @@ future_pmap(list(input_files, output_files, files_delta),
                    },
                             .progress=TRUE, 
                             .options = furrr_options(seed = 123))
-toc()
